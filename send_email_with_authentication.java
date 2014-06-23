@@ -3,11 +3,12 @@ SM_SendEmailWithAuthentication ( from ; to ; subject ; textBody ; htmlBody ; att
 import javax.mail.*;
 import javax.mail.internet.*;
 
-// Don't put comments at top of Groovyscript in 360Works ScriptMaster.
+// Don't put comments at top of Groovyscript in 360Works ScriptMaster. (Why not?)
 // Sends smtp email, with optional port-user-pass-ssl, includes attachments &
 // multipart/alternative text & html.
 // Use with Groovyscript in Filemaker's ScriptMaster (from 360Works).
 // See http://javamail.kenai.com/nonav/javadocs/javax/mail/internet/MimeMultipart.html
+// On SnowLeopard, I had to download JavaMail (javax.mail.jar) into /Library/Java/Extensions.
 // Params: from, to, subject, textBody, htmlBody, attachmentPath, smtpHost, username, password, port, cc, bcc.
 
 Properties props = new Properties();
