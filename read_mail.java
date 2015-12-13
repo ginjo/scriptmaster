@@ -1,11 +1,11 @@
-SM_ReadMail ( host ; username ; password ; provider )
+SM_ReadMail ( host ; username ; password ; provider ; callback )
 
-// Read POP3 email with groovy/java.
-// Callback to FMP script "NewMessage(string)" with raw message text.
+// Read POP3 email with groovy/java for ScriptMaster Filemaker plugin.
+// Callback to FMP script with each raw message text.
 
 // Example FM call
 // SM_ReadMail( "mail.esalen.org" ; "wbr" ; "xxxxxxx" ; "pop3s" ) & "¶¶" & SMLastStackTrace
-// Note that pop3 is port 110 and pop3s is ssl over pot 995
+// Note that pop3 is port 110 and pop3s is ssl over port 995
 
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -20,11 +20,6 @@ import java.util.Properties;
 
 // Setup connection
 Properties props = new Properties();
-// def host = "localhost";
-// def username = "testuser";
-// def password = "password";
-// def provider = "pop3";
-
 //props.setProperty("mail.store.protocol", provider);
 //props.setProperty("mail.pop3.host", host);
 //props.setProperty("mail.pop3.port", port.toString());
@@ -62,7 +57,7 @@ messages.eachWithIndex { m, i ->
   // result += "\n\n"
 
 	// Callback to FMP with raw message
-	fmpro.performScript("ScriptMasterRemote", "NewEmail(string)", output.toString())
+	fmpro.performScript("ScriptMasterRemote", callback, output.toString())
 }
 
 // Close the connection
@@ -72,4 +67,3 @@ store.close()
 
 return messageCount
 //return result
-//fmpro.performScript("ScriptMasterRemote", "NewEmail(string)", result)
