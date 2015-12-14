@@ -1,4 +1,4 @@
-SM_ReadMail ( host ; username ; password ; provider ; callback )
+SM_ReadMail ( host ; username ; password ; provider ; callbackFile ; callbackScript )
 
 // Read POP3 email with groovy/java for ScriptMaster Filemaker plugin.
 // Callback to FMP script with each raw message text.
@@ -9,7 +9,8 @@ SM_ReadMail ( host ; username ; password ; provider ; callback )
 
 import javax.mail.*;
 import javax.mail.internet.*;
-import java.util.Properties;
+import java.util.Properties; // for mail
+import java.io.*; // for string replace
 
 // wbr - Original script uses these, but SM would not load with @ in front of class,
 // but then didn't recognize classes without @ in front.
@@ -57,7 +58,10 @@ messages.eachWithIndex { m, i ->
   // result += "\n\n"
 
 	// Callback to FMP with raw message
-	fmpro.performScript("ScriptMasterRemote", callback, output.toString())
+	//def str = output.toString().getClass().toString()
+	// This substitution removes double line breaks introduced somewhere in FM (or java?).
+	def str = fmpro.evaluate('substitute("' + output.toString() + '"; char(10); char(13))')
+	fmpro.performScript(callbackFile, callbackScript, str)
 }
 
 // Close the connection
