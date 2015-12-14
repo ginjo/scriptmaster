@@ -58,8 +58,8 @@ messages.eachWithIndex { m, i ->
   // result += "\n\n"
 
 	// Callback to FMP with raw message
-	//def str = output.toString().getClass().toString()
 	// This substitution removes double line breaks introduced somewhere in FM (or java?).
+	// Java string.replace throws compilation error for some reason, thus using fm evaluate.
 	def str = fmpro.evaluate('substitute("' + output.toString() + '"; char(10); char(13))')
 	fmpro.performScript(callbackFile, callbackScript, str)
 }
