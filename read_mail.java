@@ -42,6 +42,7 @@ inbox.open(Folder.READ_ONLY)
 // Get the messages from the server
 // def result = ""; // only for concat of all raw messages.
 int messageCount = inbox.getMessageCount()
+int newMessageCount = inbox.getNewMessageCount()
 Message[] messages = inbox.getMessages(1, messageCount)
 messages.eachWithIndex { m, i ->
   // Original output
@@ -69,5 +70,5 @@ messages.eachWithIndex { m, i ->
 inbox.close false
 store.close()
 
-return messageCount
+return [messageCount, newMessageCount].toString()
 //return result
