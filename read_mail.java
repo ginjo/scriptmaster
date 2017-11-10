@@ -4,7 +4,7 @@ SM_ReadMail ( host ; username ; password ; provider ; callbackFile ; callbackScr
 // Callback to FMP script with each raw message text.
 
 // Example FM call
-// SM_ReadMail( "mail.esalen.org" ; "wbr" ; "xxxxxxx" ; "pop3s" ) & "¶¶" & SMLastStackTrace
+// SM_ReadMail( "mail.mydomain.org" ; "myusername" ; "xxxxxxx" ; "pop3s" ) & "¶¶" & SMLastStackTrace
 // Note that pop3 is port 110 and pop3s is ssl over port 995
 
 import javax.mail.*;
@@ -12,7 +12,7 @@ import javax.mail.internet.*;
 import java.util.Properties; // for mail
 import java.io.*; // for string replace
 
-// wbr - Original script uses these, but SM would not load with @ in front of class,
+// Original script uses these, but SM would not load with @ in front of class,
 // but then didn't recognize classes without @ in front.
 // @GrabConfig(systemClassLoader=true)
 // @Grapes(
